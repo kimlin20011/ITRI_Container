@@ -101,11 +101,16 @@ function main(req,res,address,sensorContract){
 	//3 second for a loop to send the gps state
 	clearInterval_id = setInterval(function(){
 		try{
+			fs.mkdirSync(`logs`,(err)=>{})
+		}catch(e){}
+		;
+		try{
 			let str;
 			let aaa;
 			var dateTime = require('node-datetime');
 			var dt = dateTime.create();
 			var formatted = dt.format('Y-m-d H:M:S');
+			let formatted2 = dt.format('Y-m-d');
 			require('getmac').getMac({iface: 'wlan0'}, function(err, macAddress){
 				obj.mac=macAddress;
 			});
@@ -121,11 +126,15 @@ function main(req,res,address,sensorContract){
 				str=obj.mac+","+formatted+","+obj.temperature+","+obj.humidity+","+obj.gps.lat+","+obj.gps.lng+","+"test\n"; 
 				obj.info="NULL";
 				console.log(str); 
-				fs.appendFile('sensorData.csv', str, function (err) {
-					if (err) throw err;
-						 console.log('Log Saved!');
-				});
-	            
+				try{
+					fs.appendFile(`logs/sensorData${formatted2}.csv`, str, function (err) {
+						if (err) throw err;
+							 console.log('Log Saved!');
+					});
+	            		}catch(e){
+					console.log(e);
+					fs.writeFileSync(`logs/sensorData${formatted2}.csv`,str,(err)=>{console.log(err);});
+				}
 	          //  aaa = `${obj.mac}_${formatted}`
 		    //send transaction to the blockchain
 			var txhash = sensorContract.addState(`${obj.mac},${formatted},${obj.gps.lat},${obj.gps.lng},${obj.temperature},${obj.humidity}`, {from:account_one, gas:4300000});                                          
