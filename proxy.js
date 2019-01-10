@@ -20,7 +20,12 @@ client.on('message',function(topic,msg){
 		console.log("start");
 		try{
 			request.post('http://127.0.0.1:3000/start',{form:{ idAddress:data.idAddress}},function(err,res,body){
-				client.publish('itriAddress/response',body);
+				let data=JSON.parse(body);
+				let obj={};
+				obj.ip=ip.address();
+				obj.status=data.status;
+				client.publish('itriAddress/response',JSON.stringify(obj));
+
 			});
 		}catch(err){
 			console.log(err);
@@ -30,7 +35,11 @@ client.on('message',function(topic,msg){
 		console.log("stop");
 		try{
 			request.post('http://127.0.0.1:3000/stop',{form:{ idAddress:data.idAddress}},function(err,res,body){
-				client.publish('itriAddress/response',body);
+				let data=JSON.parse(body);
+				let obj={};
+				obj.ip=ip.address();
+				obj.status=data.status;
+				client.publish('itriAddress/response',JSON.stringify(obj));
 			});
 
 		}catch(err){
