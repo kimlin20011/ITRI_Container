@@ -13,12 +13,14 @@
     "express": "~4.16.0",
     "getmac": "^1.4.4",
     "http-errors": "~1.6.2",
+    "ip": "^1.1.5",
     "morgan": "~1.9.0",
+    "mqtt": "^2.18.8",
     "mysql": "^2.16.0",
     "node-datetime": "^2.1.2",
     "node-dht-sensor": "0.0.34",
     "node-sense-hat": "0.0.2",
-    "serialport": "^7.1.1",
+    "serialport": "^6.2.2",
     "web3": "^0.20.6"
   }
 }
