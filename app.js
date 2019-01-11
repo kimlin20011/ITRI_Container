@@ -3,12 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const { exec } = require('child_process');
+const { exec } = require('child_process'); //直接宣告到物件裏面
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var cors = require('cors');
 var app = express();
 
+
+// npm start 後執行 proxy.js檔（mqtt連綫使用）
 exec(`node proxy.js`, (error, stdout, stderr) => {})
 
 
