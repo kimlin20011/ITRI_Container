@@ -3,13 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const { exec } = require('child_process');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var cors = require('cors');
+let request= require('request');
 var app = express();
 
-exec(`node proxy.js`, (error, stdout, stderr) => {})
 
 
 // view engine setup
@@ -42,5 +41,13 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+let obj={};
+require('getmac').getMac({iface: 'wlan0'}, function(err, macAddress){
+	obj.mac=macAddress;
+	request.post('http://140.119.163.196:3000/registerDevice',{form:{mac:macAddress}});
+});
+setInterval(()=>{
+	request.post('http://140.119.163.196:3000/registerDevice',{form:{mac:obj.mac}});
+},120000);
 
 module.exports = app;
