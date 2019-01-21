@@ -39,12 +39,12 @@ sudo cp build/bin/geth /usr/local/bin/
 * 先確認安裝好go與go-ethereum
 * 建立一個empty資料夾
 ```shell=
-$ mkdir chain
-$ cd chain
+mkdir chain
+cd chain
 ```
 * 在資料夾中建立genesis.json
 ```
-$ vim genesis.json
+vim genesis.json
 
 //輸入創世區塊内文
 {
