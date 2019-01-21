@@ -1,4 +1,4 @@
-# 工研院計劃樹莓派部分安裝説明
+﻿# 工研院計劃樹莓派部分安裝説明
 ## 使用以太坊私有鏈版本
 *  Geth/v1.8.20-stable
 *  go1.10.1
@@ -39,12 +39,12 @@ sudo cp build/bin/geth /usr/local/bin/
 * 先確認安裝好go與go-ethereum
 * 建立一個empty資料夾
 ```shell=
-mkdir chain
-cd chain
+$ mkdir chain
+$ cd chain
 ```
 * 在資料夾中建立genesis.json
 ```
-vim genesis.json
+$ vim genesis.json
 
 //輸入創世區塊内文
 {
@@ -96,15 +96,27 @@ vim static-nodes.json
 ```
 
 
-## 主合約部署步驟(伺服器部分)
-1. 啓動終端機，到`BP-web/migrate`的資料夾下，啓動私有鏈（預設8545 port）
+## 系統啓用步驟
+1. 啓動終端機，，啓動私有鏈（預設8545 port）
 ```shell=
-git clone https://github.com/kimlin20011/Blockchain-logistic-project-backend.git
-cd Blockchain-logistic-project-backend.git
+git clone https://github.com/kimlin20011/ITRI_Container.git
+cd ITRI_Container
+npm install
+//新增env檔案
+vim .env
+
+//輸入内文
+local = 'localhost'
+SUB_HOST='{Server IP}'
+
+
 npm start
 ```
 
 ## note
 * 在此系統中，所有交易都使用`account[0]`送出
+
+
+
 
 ###### tags: `blockchain`
