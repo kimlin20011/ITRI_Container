@@ -58,10 +58,12 @@ class GetSensor{
 		}
 
 	stop(req,res,next){
-        myEvent.stopWatching();
-        clearInterval(clearInterval_id);
-        portTest.close();
-        console.log(`clearInterval and stop watching`);
+        	myEvent.stopWatching();
+        	clearInterval(clearInterval_id);
+		portTest.close(function(err){
+			console.log(err);
+		});
+		console.log(`clearInterval and stop watching`);
 		res.json({status:"stop"});
         return;
     }
@@ -93,10 +95,7 @@ function main(req,res,address,sensorContract){
 			}
 			buf="";
 		}
-
-		buf += data.toString('ascii');
-	
-		
+		buf += data.toString('ascii');	
 	});
 	//3 second for a loop to send the gps state
 	clearInterval_id = setInterval(function(){
